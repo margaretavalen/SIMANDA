@@ -1,0 +1,138 @@
+{% extends "layout.html" %}
+
+    {% block navbar %}
+    <nav id="navmenu" class="navmenu">
+      <ul>
+        <li><a href="/login/dashboard" class="active">Dashboard</a></li>
+        <li><a href="/login/data">Data Peserta</a></li>
+        <li><a href="/login/penugasan">Penugasan</a></li>
+        <li><a href="/login/contact">Kontak</a></li>
+        <li><a class="nav-bg" href="/logout">LOGOUT</a></li>
+      </ul>
+      <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+    </nav>
+    {% endblock %}
+  
+    <main class="main">
+      {% block content %}
+      <!-- Page Title -->
+      <section id="hero" class="hero dark-background">
+        <div class="container">
+          <div class="row gy-4 justify-content-between">
+            <div class="col-lg-4 order-lg-last hero-img" data-aos="zoom-out" data-aos-delay="100">
+              <img src="{{ url_for('static', filename='img/hero-img.png') }}" class="img-fluid animated" alt="" />
+            </div>
+            <div class="col-lg-6 d-flex flex-column justify-content-center" data-aos="fade-in">
+              <h1>Welcome <span>{{ username }}</span></h1>
+              <p>Selamat datang di SIMANDA Dinas Komunikasi, Informatika, Statistik dan Persandian Kota Semarang.</p>
+            </div>
+          </div>
+        </div>
+        <svg class="hero-waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28 " preserveAspectRatio="none" >
+          <defs>
+            <path id="wave-path" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" ></path>
+          </defs>
+          <g class="wave1">
+            <use xlink:href="#wave-path" x="50" y="3"></use>
+          </g>
+          <g class="wave2">
+            <use xlink:href="#wave-path" x="50" y="0"></use>
+          </g>
+          <g class="wave3">
+            <use xlink:href="#wave-path" x="50" y="9"></use>
+          </g>
+        </svg>
+      </section>
+      <!-- End Page Title -->
+
+      <!-- Starter Section -->
+      <section id="starter-section" class="starter-section section">
+        <!-- Section Title -->
+        <div class="dashboard" data-aos="fade-up">
+          <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+            <div class="dashboard-hero">
+              <div class="row align-items-center">
+                <div class="col-lg-7" data-aos="fade-up" data-aos-delay="200">
+                  <div class="hero-content">
+                    <h2>Perkembangan partisipasi peserta magang</h2>
+                    <p>Lihat dan ikuti pertumbuhan jumlah peserta magang DISKOMINFO Kota Semarang secara real-time di SIMANDA.</p>
+                    <div class="dashboard-metrics">
+                      <div class="metric">
+                        <div class="counter">{{ total_peserta }}</div>
+                        <div class="label">Peserta Magang</div>
+                      </div>
+                      <div class="metric">
+                        <div class="counter">{{ total_universitas }}</div>
+                        <div class="label">Sekolah & Universitas</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-5" data-aos="zoom-in" data-aos-delay="300">
+                  <h4>Jumlah Peserta Magang per Tahun</h4>
+                  <canvas id="magangChart" width="600" height="300"></canvas>
+                </div>
+                <script>
+                  const chartLabels = {{ labels | tojson | safe }};
+                  const chartData = {{ data | tojson | safe }};
+                </script>
+              </div>
+            </div>
+
+            <div class="dashboard-engagement">
+              <div class="section-header text-center" data-aos="fade-up" data-aos-delay="200">
+                <h3>Benefit Magang</h3>
+                <p>DISKOMINFO Kota Semarang memberikan manfaat yang berharga bagi para peserta</p>
+              </div>
+              <div class="engagement-cards">
+                <div class="row">
+                  <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="engagement-card">
+                      <div class="card-icon">
+                        <i class="bi bi-people-fill"></i>
+                      </div>
+                      <h4>Pengembangan</h4>
+                      <p>Pengembangan hard skill & soft skill yang telah didapatkan agar memberikan peluang bagi Anda untuk berkembang sebagai seorang profesional yang komprehensif.</p>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="400">
+                    <div class="engagement-card">
+                      <div class="card-icon">
+                        <i class="bi bi-calendar-event"></i>
+                      </div>
+                      <h4>Pengalaman</h4>
+                      <p>DISKOMINFO Kota Semarang menerapkan budaya kerja BerAKHLAK sebagai landasan pelayanan publik yang profesional, akuntabel, kolaboratif, dan adaptif demi peningkatan kualitas layanan dan kinerja aparatur.</p>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="500">
+                    <div class="engagement-card">
+                      <div class="card-icon">
+                        <i class="bi bi-gift"></i>
+                      </div>
+                      <h4>Sertifikat</h4>
+                      <p>Sertifikat kelulusan magang yang eksklusif dalam bentuk hardfile dan softfile yang dapat di download dengan format penilaian yang sesuai dengan lembaga pendidikan Anda.</p>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="600">
+                    <div class="engagement-card">
+                      <div class="card-icon">
+                        <i class="bi bi-briefcase"></i>
+                      </div>
+                      <h4>Relasi</h4>
+                      <p>Membangun relasi profesional dengan mentor dan rekan kerja, yang sangat bermanfaat untuk membuka peluang karier di masa depan.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+      <!-- End Starter Section -->
+      {% endblock %}
+    </main>

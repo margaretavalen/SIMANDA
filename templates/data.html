@@ -1,0 +1,324 @@
+{% extends "layout.html" %}
+
+    {% block navbar %}
+    <nav id="navmenu" class="navmenu">
+      <ul>
+        <li><a href="/login/dashboard">Dashboard</a></li>
+        <li><a href="/login/data" class="active">Data Peserta</a></li>
+        <li><a href="/login/penugasan">Penugasan</a></li>
+        <li><a href="/login/contact">Kontak</a></li>
+        <li><a class="nav-bg" href="/logout">LOGOUT</a></li>
+      </ul>
+      <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+    </nav>
+    {% endblock %}
+  
+    <main class="main">
+      {% block content %}
+      <!-- Page Title -->
+      <section id="hero" class="hero dark-background">
+        <div class="page-title dark-background">
+          <div class="container position-relative">
+            <h1>Data Magang</h1>
+            <p>Data Peserta Magang Dinas Komunikasi, Informatika, Statistik dan Persandian Kota Semarang.</p>
+            <nav class="breadcrumbs">
+              <ol>
+                <li><a href="/dashboard">Dashboard</a></li>
+                <li class="current">Data Magang</li>
+              </ol>
+            </nav>
+          </div>
+        </div>
+        <svg class="hero-waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28 " preserveAspectRatio="none" >
+          <defs>
+            <path id="wave-path" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" ></path>
+          </defs>
+          <g class="wave1">
+            <use xlink:href="#wave-path" x="50" y="3"></use>
+          </g>
+          <g class="wave2">
+            <use xlink:href="#wave-path" x="50" y="0"></use>
+          </g>
+          <g class="wave3">
+            <use xlink:href="#wave-path" x="50" y="9"></use>
+          </g>
+        </svg>
+      </section>
+      <!-- End Page Title -->
+
+      <!-- Starter Section -->
+      <section id="starter-section" class="starter-section section">
+        <!-- Section Title -->
+        <div class="container section-title" data-aos="fade-up">
+          <h2>Data Peserta Magang</h2>
+          <div>
+            <span>Cek Data Peserta Magang</span>
+          </div>
+        </div>
+
+        <div class="container" data-aos="fade-up">
+
+          <!-- Tabs -->
+          <div class="starter-section-tabs mt-5" data-aos="fade-up" data-aos-delay="200">
+            <ul class="nav nav-pills mb-4 justify-content-center" id="studentLifeTabs" role="tablist">
+              <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="akanMagang-tab" data-bs-toggle="pill" data-bs-target="#starter-section-akanMagang" type="button" role="tab" aria-controls="akanMagang" aria-selected="true">
+                  <i class="bi bi-person-fill-add"></i> Akan Magang
+                </button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" id="sedangMagang-tab" data-bs-toggle="pill" data-bs-target="#starter-section-sedangMagang" type="button" role="tab" aria-controls="sedangMagang" aria-selected="false">
+                  <i class="bi bi-person-workspace"></i> Sedang Magang
+                </button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" id="selesaiMagang-tab" data-bs-toggle="pill" data-bs-target="#starter-section-selesaiMagang" type="button" role="tab" aria-controls="selesaiMagang" aria-selected="false">
+                  <i class="bi bi-person-check-fill"></i> Selesai Magang
+                </button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" id="batalMagang-tab" data-bs-toggle="pill" data-bs-target="#starter-section-batalMagang" type="button" role="tab" aria-controls="batalMagang" aria-selected="false">
+                  <i class="bi bi-x-square"></i> Batal Magang
+                </button>
+              </li>
+            </ul>        
+            
+            <div class="tab-content" id="studentLifeTabsContent">
+              <!-- Akan Magang -->
+              <div class="tab-pane fade show active" id="starter-section-akanMagang" role="tabpanel" aria-labelledby="akanMagang-tab">
+                <div class="Magang_members">
+                  <!-- Search -->
+                  <div class="table-controls">
+                    <div class="page">
+                      <label>
+                        <select id="akanRowsPerPage">
+                          <option value="10" selected>10</option>
+                          <option value="25">25</option>
+                          <option value="50">50</option>
+                          <option value="100">100</option>
+                        </select>
+                        entries
+                      </label>
+                    </div>
+                    <div class="search-box">
+                      <button class="btn-search"><i class="bi bi-search"></i></button>
+                      <input id="searchAkanMagang" type="text" class="input-search" placeholder="Cari">
+                    </div>
+                  </div>
+                  <!-- Tabel -->
+                  {% if data %}
+                  <table class="MagangTabel" id="akanMagangTable">
+                    <thead>
+                      <tr>
+                        <th>No</th>
+                        <th>Foto</th>
+                        <th>Nama</th>
+                        <th>Asal</th>
+                        <th>Jurusan</th>
+                        <th>Tanggal Masuk</th>
+                        <th>Tanggal Keluar</th>
+                        <th>Penempatan</th>
+                      </tr>
+                    </thead>
+                    <tbody id="akanTableBody">
+                    {% for row in data if row.status == 'Akan Magang' %}
+                      <tr>
+                        <td class="row-number"></td>
+                        <td><img src="{{ url_for('gambar', id=row.id) }}" loading="lazy"></td>
+                        <td>{{ row.nama }}</td>
+                        <td>{{ row.asal }}</td>
+                        <td>{{ row.jurusan }}</td>
+                        <td>{{ row.tgl_masuk }}</td>
+                        <td>{{ row.tgl_keluar }}</td>
+                        <td>{{ row.bidang }}</td>
+                      </tr>
+                    {% endfor %}
+                    </tbody>
+                  </table>
+                  <div id="akanPagination" class="pagination"></div>
+                  {% else %}
+                    <p>Data tidak ditemukan.</p>
+                  {% endif %}
+                </div>
+              </div>
+
+              <!-- Sedang Magang -->
+              <div class="tab-pane fade" id="starter-section-sedangMagang" role="tabpanel" aria-labelledby="sedangMagang-tab">
+                <div class="Magang_members">
+                  <!-- Search -->
+                  <div class="table-controls">
+                    <div class="page">
+                      <label>
+                        <select id="sedangRowsPerPage">
+                          <option value="10" selected>10</option>
+                          <option value="25">25</option>
+                          <option value="50">50</option>
+                          <option value="100">100</option>
+                        </select>
+                        entries
+                      </label>
+                    </div>
+                    <div class="search-box">
+                      <button class="btn-search"><i class="bi bi-search"></i></button>
+                      <input id="searchSedangMagang" type="text" class="input-search" placeholder="Cari">
+                    </div>
+                  </div>
+                  <!-- Tabel -->
+                  {% if data %}
+                  <table class="MagangTabel" id="sedangMagangTable">
+                    <thead>
+                      <tr>
+                        <th>No</th>
+                        <th>Foto</th>
+                        <th>Nama</th>
+                        <th>Asal</th>
+                        <th>Jurusan</th>
+                        <th>Tanggal Masuk</th>
+                        <th>Tanggal Keluar</th>
+                        <th>Penempatan</th>
+                      </tr>
+                    </thead>
+                    <tbody id="sedangTableBody">
+                    {% for row in data if row.status == 'Sedang Magang' %}
+                      <tr>
+                        <td class="row-number"></td>
+                        <td><img src="{{ url_for('gambar', id=row.id) }}" loading="lazy"></td>
+                        <td>{{ row.nama }}</td>
+                        <td>{{ row.asal }}</td>
+                        <td>{{ row.jurusan }}</td>
+                        <td>{{ row.tgl_masuk }}</td>
+                        <td>{{ row.tgl_keluar }}</td>
+                        <td>{{ row.bidang }}</td>
+                      </tr>
+                    {% endfor %}
+                    </tbody>
+                  </table>
+                  <div id="sedangPagination" class="pagination"></div>
+                  {% else %}
+                    <p>Data tidak ditemukan.</p>
+                  {% endif %}
+                </div>
+              </div>
+              
+              <!-- Sudah Magang -->
+              <div class="tab-pane fade" id="starter-section-selesaiMagang" role="tabpanel" aria-labelledby="selesaiMagang-tab">
+                <div class="Magang_members">
+                  <!-- Search -->
+                  <div class="table-controls">
+                    <div class="page">
+                      <label>
+                        <select id="selesaiRowsPerPage">
+                          <option value="10" selected>10</option>
+                          <option value="25">25</option>
+                          <option value="50">50</option>
+                          <option value="100">100</option>
+                        </select>
+                        entries
+                      </label>
+                    </div>
+                    <div class="search-box">
+                      <button class="btn-search"><i class="bi bi-search"></i></button>
+                      <input id="searchSelesaiMagang" type="text" class="input-search" placeholder="Cari">
+                    </div>
+                  </div>
+                  <!-- Tabel -->
+                  {% if data %}
+                  <table class="MagangTabel" id="selesaiMagangTable">
+                    <thead>
+                      <tr>
+                        <th>No</th>
+                        <th>Foto</th>
+                        <th>Nama</th>
+                        <th>Asal</th>
+                        <th>Jurusan</th>
+                        <th>Tanggal Masuk</th>
+                        <th>Tanggal Keluar</th>
+                        <th>Penempatan</th>
+                      </tr>
+                    </thead>
+                    <tbody id="selesaiTableBody">
+                    {% for row in data if row.status == 'Selesai Magang' %}
+                      <tr>
+                        <td class="row-number"></td>
+                        <td><img src="{{ url_for('gambar', id=row.id) }}" loading="lazy"></td>
+                        <td>{{ row.nama }}</td>
+                        <td>{{ row.asal }}</td>
+                        <td>{{ row.jurusan }}</td>
+                        <td>{{ row.tgl_masuk }}</td>
+                        <td>{{ row.tgl_keluar }}</td>
+                        <td>{{ row.bidang }}</td>
+                      </tr>
+                    {% endfor %}
+                    </tbody>
+                  </table>
+                  <div id="selesaiPagination" class="pagination"></div>
+                  {% else %}
+                    <p>Data tidak ditemukan.</p>
+                  {% endif %}
+                </div>
+              </div>
+
+              <!-- Batal Magang -->
+              <div class="tab-pane fade" id="starter-section-batalMagang" role="tabpanel" aria-labelledby="batalMagang-tab">
+                <div class="Magang_members">
+                  <!-- Search -->
+                  <div class="table-controls">
+                    <div class="page">
+                      <label>
+                        <select id="batalRowsPerPage">
+                          <option value="10" selected>10</option>
+                          <option value="25">25</option>
+                          <option value="50">50</option>
+                          <option value="100">100</option>
+                        </select>
+                        entries
+                      </label>
+                    </div>
+                    <div class="search-box">
+                      <button class="btn-search"><i class="bi bi-search"></i></button>
+                      <input id="searchBatalMagang" type="text" class="input-search" placeholder="Cari">
+                    </div>
+                  </div>
+                  <!-- Tabel -->
+                  {% if data %}
+                  <table class="MagangTabel" id="batalMagangTable">
+                    <thead>
+                      <tr>
+                        <th>No</th>
+                        <th>Foto</th>
+                        <th>Nama</th>
+                        <th>Asal</th>
+                        <th>Jurusan</th>
+                        <th>Tanggal Masuk</th>
+                        <th>Tanggal Keluar</th>
+                      </tr>
+                    </thead>
+                    <tbody id="batalTableBody">
+                    {% for row in data if row.status == 'Batal Magang' %}
+                      <tr>
+                        <td class="row-number"></td>
+                        <td><img src="{{ url_for('gambar', id=row.id) }}" loading="lazy"></td>
+                        <td>{{ row.nama }}</td>
+                        <td>{{ row.asal }}</td>
+                        <td>{{ row.jurusan }}</td>
+                        <td>{{ row.tgl_masuk }}</td>
+                        <td>{{ row.tgl_keluar }}</td>
+                      </tr>
+                    {% endfor %}
+                    </tbody>
+                  </table>
+                  <div id="batalPagination" class="pagination"></div>
+                  {% else %}
+                    <p>Data tidak ditemukan.</p>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+            <!-- End tab-content -->
+          </div>
+          <!-- End tabs -->
+        </div>
+      </section>
+      <!-- End Starter Section -->
+      {% endblock %}
+    </main>

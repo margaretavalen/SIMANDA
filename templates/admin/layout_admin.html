@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>ADMIN SIMANDA DISKOMINFO KOTA SEMARANG</title>
+
+    <link href="{{ url_for('static', filename='img/favicon.png') }}" rel="icon" />
+
+    <!--  Fonts and icons     -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+
+    <!-- Nucleo Icons -->
+    <link href="https://demos.creative-tim.com/argon-dashboard-pro/assets/css/nucleo-icons.css" rel="stylesheet"/>
+    <link href="https://demos.creative-tim.com/argon-dashboard-pro/assets/css/nucleo-svg.css" rel="stylesheet"/>
+    <!-- Font Awesome Icons -->
+    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+
+    <script src="{{ url_for('static', filename='vendor/purecounter/purecounter_vanilla.js') }}"></script>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <link href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet"/>
+    <link href="{{ url_for('static', filename='vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet"/>
+
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" />
+
+    <!-- Buttons CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.bootstrap5.min.css"/>
+
+    <!-- CSS Files -->
+    <link id="pagestyle" href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet" />
+    <link id="pagestyle" href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet"/>
+  </head>
+
+  <body class="g-sidenav-show bg-gray-100">
+    <div class="min-height-300 bg-dark position-absolute w-100"></div>
+    <aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4" id="sidenav-main">
+      <div class="sidenav-header">
+        <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
+        <a class="navbar-brand m-0" target="_blank">
+          <img src="{{ url_for('static', filename='img/favicon.png') }}" width="26px" height="26px" class="navbar-brand-img h-100" alt="main_logo"/>
+          <span class="ms-1 font-weight-bold">Admin SIMANDA</span>
+        </a>
+      </div>
+      <hr class="horizontal dark mt-0" />
+      {% block sidenav %} {% endblock %}
+    </aside>
+    <main class="main-content position-relative border-radius-lg">
+      {% block navbar %} {% endblock %}
+      <div class="container-fluid py-4">
+        {% block content %} {% endblock %}
+        <footer class="footer pt-3">
+          <div class="container-fluid">
+            <div class="row align-items-center justify-content-lg-between">
+              <div class="col-lg-6 mb-lg-0 mb-4">
+                <div class="copyright text-center text-sm text-muted text-lg-start">
+                  ©
+                  <script>
+                    document.write(new Date().getFullYear());
+                  </script>
+                  , made with <i class="fa fa-heart"></i> by
+                  <a class="font-weight-bold" target="_blank"
+                    >DISKOMINFO Kota Semarang</a
+                  >
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <ul class="nav nav-footer justify-content-center justify-content-lg-end"> <li class="nav-item">
+                    <a
+                      href="https://x.com/kominfokotasmg"
+                      class="nav-link pe-0 text-muted"
+                      ><i class="bi bi-twitter-x"></i
+                    ></a>
+                  </li>
+                  <li class="nav-item">
+                    <a
+                      href="https://www.facebook.com/diskominfokotasemarang/"
+                      class="nav-link pe-0 text-muted"
+                      ><i class="bi bi-facebook"></i
+                    ></a>
+                  </li>
+                  <li class="nav-item">
+                    <a
+                      href="https://www.instagram.com/diskominfokotasemarang"
+                      class="nav-link pe-0 text-muted"
+                      ><i class="bi bi-instagram"></i
+                    ></a>
+                  </li>
+                  <li class="nav-item">
+                    <a
+                      href="https://www.youtube.com/@semarangpemkot"
+                      class="nav-link pe-0 text-muted"
+                      ><i class="bi bi-youtube"></i
+                    ></a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </footer>
+      </div>
+    </main>
+    <!--   Core JS Files   -->
+    <script src="{{ url_for('static', filename='js/admin/core/popper.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/admin/core/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/admin/plugins/perfect-scrollbar.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/admin/plugins/smooth-scrollbar.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/admin/plugins/chartjs.min.js') }}"></script>
+
+    <!-- jQuery (DataTables butuh jQuery) -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+
+    <!-- DataTables JS -->
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+
+    <!-- Buttons JS dan dependencies -->
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.bootstrap5.min.js"></script>
+
+    <!-- JSZip untuk export Excel -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+
+    <!-- Buttons HTML5 export -->
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+      document.getElementById('jurusan').addEventListener('input', function () {
+        const jurusan = this.value;
+
+        if (!jurusan.trim()) {
+            document.getElementById('rekomendasiText').textContent = '';
+            return;
+        }
+
+        fetch('/predict_bidang', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ jurusan: jurusan })
+        })
+        .then(response => response.json())
+        .then(data => {
+            const bidang = data.bidang || 'Tidak ada rekomendasi';
+            document.getElementById('rekomendasiText').textContent = 'Rekomendasi: ' + bidang;
+        })
+        .catch(error => {
+            console.error('Fetch error:', error);
+            document.getElementById('rekomendasiText').textContent = 'Gagal mengambil rekomendasi';
+        });
+      });
+    </script>
+
+    <script>
+
+      document.addEventListener("DOMContentLoaded", function () {
+        const labels = JSON.parse(document.getElementById('chart-line').dataset.labels);
+        const data = JSON.parse(document.getElementById('chart-line').dataset.data);
+
+        const ctx = document.getElementById('chart-line').getContext('2d');
+        const chart = new Chart(ctx, {
+          type: 'line',
+          data: {
+            labels: labels,
+            datasets: [{
+              label: 'Jumlah Peserta',
+              data: data,
+              borderColor: '#5e72e4',
+              backgroundColor: 'rgba(94, 114, 228, 0.2)',
+              fill: true,
+              tension: 0.4
+            }]
+          },
+          options: {
+            responsive: true,
+            plugins: {
+              legend: { display: true },
+              datalabels: {
+                align: 'top',
+                anchor: 'end',
+                color: '#000',
+                font: {
+                  weight: 'bold'
+                },
+                formatter: function (value) {
+                  return value;
+                }
+              }
+            },
+            scales: {
+              y: {
+                beginAtZero: true,
+                title: { display: true, text: 'Jumlah Peserta' }
+              },
+              x: {
+                title: { display: true, text: 'Bulan' }
+              }
+            }
+          },
+          plugins: [ChartDataLabels]
+        });
+      });
+    </script>
+    
+    <script>
+      var win = navigator.platform.indexOf("Win") > -1;
+      if (win && document.querySelector("#sidenav-scrollbar")) {
+        var options = {
+          damping: "0.5",
+        };
+        Scrollbar.init(document.querySelector("#sidenav-scrollbar"), options);
+      }
+    </script>
+
+    <!-- Inisialisasi DataTables -->
+    <script>
+      function initDataTable(id) {
+        if (!$.fn.DataTable.isDataTable(id)) {
+          $(id).DataTable({
+            responsive: !0,
+            autoWidth: !1,
+            pageLength: 5,
+            lengthMenu: [5, 10, 25, 50],
+            language: {
+              search: "Cari:",
+              lengthMenu: "_MENU_ data",
+              info: "Menampilkan _START_ sampai _END_ dari _TOTAL_ data",
+              paginate: {
+                first: "first",
+                last: "last",
+                next: "next",
+                previous: "prev",
+              },
+              emptyTable: "Tidak ada data tersedia",
+            },
+            dom: '<"row mb-2"<"col-md-6 d-flex align-items-center gap-2"B l><"col-md-6 text-end"f>>rt<"row mt-2"<"col-md-6"i><"col-md-6 text-end"p>>',
+            buttons: [
+              {
+                extend: "excelHtml5",
+                text: '<i class="bi bi-file-earmark-excel"></i>',
+                className: "button-export",
+                titleAttr: "Export ke Excel",
+                exportOptions: {
+                  columns: ":not(:last-child)",
+                },
+              },
+            ],
+          });
+        }
+      }
+
+      $(document).ready(() => {
+        initDataTable("#akanTable");
+
+        $("button[data-bs-toggle='tab']").on("shown.bs.tab", (e) => {
+          let t = $(e.target).attr("data-bs-target");
+          switch (t) {
+            case "#akan":
+              initDataTable("#akanTable");
+              break;
+            case "#sedang":
+              initDataTable("#sedangTable");
+              break;
+            case "#selesai":
+              initDataTable("#selesaiTable");
+              break;
+            case "#batal":
+              initDataTable("#batalTable");
+              break;
+          }
+        });
+      });
+    </script>
+
+    <script>
+      $(".datatable").DataTable({
+        responsive: true,
+        autoWidth: false,
+        pageLength: 10,
+        lengthMenu: [10, 25, 50, 100],
+        language: {
+          search: "Cari:",
+          lengthMenu: "_MENU_ data",
+          info: "Menampilkan _START_ sampai _END_ dari _TOTAL_ data",
+          infoEmpty: "Menampilkan 0 sampai 0 dari 0 data",
+          infoFiltered: "(disaring dari _MAX_ total data)",
+          zeroRecords: "Tidak ditemukan data yang sesuai",
+          emptyTable: "Data tidak ditemukan",
+          paginate: {
+            first: "first",
+            last: "last",
+            next: "next",
+            previous: "prev",
+          },
+        },
+        dom: '<"row mb-2"<"col-md-6 d-flex align-items-center gap-2"B l><"col-md-6 text-end"f>>rt<"row mt-2"<"col-md-6"i><"col-md-6 text-end"p>>',
+        buttons: [
+          {
+            extend: "excelHtml5",
+            text: '<i class="bi bi-file-earmark-excel"></i>',
+            className: "button-export",
+            titleAttr: "Export ke Excel",
+            exportOptions: {
+              columns: ":not(:last-child)",
+            },
+          },
+        ],
+      });
+    </script>
+    
+    <!-- Chart JS -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+    
+    <script src="{{ url_for('static', filename='js/chart.js') }}"></script>
+    
+    <!-- Github buttons -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
+    <script src="{{ url_for('static', filename='js/admin/argon-dashboard.min.js?v=2.1.0') }}"></script>
+    <script src="{{ url_for('static', filename='js/admin/main.js') }}"></script>
+  </body>
+</html>

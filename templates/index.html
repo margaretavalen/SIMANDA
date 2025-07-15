@@ -1,0 +1,522 @@
+{% extends "layout.html" %} {% block navbar %}
+<nav id="navmenu" class="navmenu">
+  <ul>
+    <li><a href="/" class="active">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="/contact">Kontak</a></li>
+    <li><a class="nav-bg" href="/loginregister">LOGIN</a></li>
+  </ul>
+  <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+</nav>
+{% endblock %}
+
+<main class="main">
+  {% block content %}
+  <!-- Hero Section -->
+  <section id="hero" class="hero section dark-background">
+    <img src="{{ url_for('static', filename='img/hero-bg-2.jpg') }}" alt="" class="hero-bg" />
+    <div class="container">
+      <div class="row gy-4 justify-content-between">
+        <div class="col-lg-4 order-lg-last hero-img" data-aos="zoom-out" data-aos-delay="100" >
+          <img src="{{ url_for('static', filename='img/hero-img.png') }}" class="img-fluid animated" alt="" />
+        </div>
+
+        <div class="col-lg-6 d-flex flex-column justify-content-center" data-aos="fade-in" >
+          <h1>Welcome to <span>SIMANDA</span></h1>
+          <p>
+            Sistem Informasi Monitoring Anak Magang Dinas Komunikasi,
+            Informatika, Statistik dan Persandian Kota Semarang
+          </p>
+          <div class="d-flex">
+            <a href="#about" class="btn-get-started">Get Started</a>
+            <a href="https://www.youtube.com/watch?v=Y7f98aduVJ8" class="glightbox btn-watch-video d-flex align-items-center"><i class="bi bi-play-circle"></i><span>Watch Video</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <svg
+      class="hero-waves"
+      xmlns="http://www.w3.org/2000/svg"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+      viewBox="0 24 150 28 "
+      preserveAspectRatio="none"
+    >
+      <defs>
+        <path
+          id="wave-path"
+          d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"
+        ></path>
+      </defs>
+      <g class="wave1">
+        <use xlink:href="#wave-path" x="50" y="3"></use>
+      </g>
+      <g class="wave2">
+        <use xlink:href="#wave-path" x="50" y="0"></use>
+      </g>
+      <g class="wave3">
+        <use xlink:href="#wave-path" x="50" y="9"></use>
+      </g>
+    </svg>
+  </section>
+  <!-- /Hero Section -->
+
+  <!-- About Section -->
+  <section id="about" class="about section">
+    <div class="container" data-aos="fade-up" data-aos-delay="100">
+      <div class="row align-items-xl-center gy-5">
+        <div class="col-xl-5 content">
+          <h3>About Us</h3>
+          <h2>Sistem Informasi Monitoring Anak Magang Diskominfo</h2>
+          <p>
+            SIMANDA adalah aplikasi berbasis web yang dirancang untuk membantu
+            Dinas Komunikasi dan Informatika Kota Semarang dalam melakukan
+            pemantauan, pengelolaan, dan evaluasi data peserta magang secara
+            digital dan terintegrasi.
+          </p>
+          <a href="#" class="read-more"
+            ><span>Read More</span><i class="bi bi-arrow-right"></i
+          ></a>
+        </div>
+        <div class="col-xl-7">
+          <div class="row gy-4 icon-boxes">
+            <div class="col-md-6" data-aos="fade-up" data-aos-delay="500">
+              <div class="icon-box">
+                <i class="bi bi-chat-dots-fill"></i>
+                <h3>Bidang Pengembangan Komunikasi Publik</h3>
+                <p>
+                  Fokus pada strategi komunikasi publik dan pengembangan SDM
+                  komunitas TIK
+                </p>
+                <p>
+                  <strong>Jumlah peserta:</strong> {{
+                  jumlah_per_bidang["Pengembangan Komunikasi Publik"] }}
+                </p>
+              </div>
+            </div>
+
+            <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
+              <div class="icon-box">
+                <i class="bi bi-graph-up-arrow"></i>
+                <h3>Bidang Statistik</h3>
+                <p>
+                  Menangani statistik infrastruktur, tata ruang, lingkungan,
+                  serta pengelolaan statistik sektoral dan geospasial
+                </p>
+                <p>
+                  <strong>Jumlah peserta:</strong> {{
+                  jumlah_per_bidang["Statistik"] }}
+                </p>
+              </div>
+            </div>
+
+            <div class="col-md-6" data-aos="fade-up" data-aos-delay="300">
+              <div class="icon-box">
+                <i class="bi bi-building"></i>
+                <h3>Bidang Infrastruktur</h3>
+                <p>
+                  Bertanggung jawab atas layanan infrastruktur TIK, pengelolaan
+                  saluran informasi, dan jaringan internet maupun intranet
+                </p>
+                <p>
+                  <strong>Jumlah peserta:</strong> {{
+                  jumlah_per_bidang["Infrastruktur"] }}
+                </p>
+              </div>
+            </div>
+            <!-- End Icon Box -->
+
+            <div class="col-md-6" data-aos="fade-up" data-aos-delay="700">
+              <div class="icon-box">
+                <i class="bi bi-film"></i>
+                <h3>
+                  Bidang Pengelolaan Informasi dan Saluran Komunikasi Publik
+                </h3>
+                <p>
+                  Mengelolaan media, aspirasi publik, dan layanan keterbukaan
+                  informasi melalui PPID
+                </p>
+                <p>
+                  <strong>Jumlah peserta:</strong> {{
+                  jumlah_per_bidang["Pengelolaan Informasi"] }}
+                </p>
+              </div>
+            </div>
+
+            <div class="col-md-6" data-aos="fade-up" data-aos-delay="400">
+              <div class="icon-box">
+                <i class="bi bi-clipboard-pulse"></i>
+                <h3>Bidang Sekretariat</h3>
+                <p>
+                  Mengelolaan administrasi umum, kepegawaian, keuangan, dan
+                  barang milik daerah
+                </p>
+                <p>
+                  <strong>Jumlah peserta:</strong> {{
+                  jumlah_per_bidang["Sekretariat"] }}
+                </p>
+              </div>
+            </div>
+
+            <div class="col-md-6" data-aos="fade-up" data-aos-delay="600">
+              <div class="icon-box">
+                <i class="bi bi-pc-display"></i>
+                <h3>Bidang Sistem Pemerintahan Berbasis Elektronik</h3>
+                <p>
+                  Mengelola keamanan informasi, pengembangan aplikasi, serta
+                  tata kelola TIK
+                </p>
+                <p>
+                  <strong>Jumlah peserta:</strong> {{ jumlah_per_bidang["Sistem Pemerintahan"] }}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- /About Section -->
+
+  <!-- Stats Section -->
+  <section id="stats" class="stats section light-background">
+    <div class="container" data-aos="fade-up" data-aos-delay="100">
+      <div class="row gy-4">
+        <div class="col-lg-3 col-md-6 d-flex flex-column align-items-center">
+          <i class="bi bi-person-fill-add"></i>
+          <div class="stats-item">
+            <span
+              data-purecounter-start="0"
+              data-purecounter-end="{{ akan_magang }}"
+              data-purecounter-duration="1"
+              class="purecounter"
+            ></span>
+            <p>Akan Magang</p>
+          </div>
+        </div>
+        <!-- End Stats Item -->
+
+        <div class="col-lg-3 col-md-6 d-flex flex-column align-items-center">
+          <i class="bi bi-person-workspace"></i>
+          <div class="stats-item">
+            <span
+              data-purecounter-start="0"
+              data-purecounter-end="{{ sedang_magang }}"
+              data-purecounter-duration="1"
+              class="purecounter"
+            ></span>
+            <p>Sedang Magang</p>
+          </div>
+        </div>
+        <!-- End Stats Item -->
+
+        <div class="col-lg-3 col-md-6 d-flex flex-column align-items-center">
+          <i class="bi bi-person-check-fill"></i>
+          <div class="stats-item">
+            <span
+              data-purecounter-start="0"
+              data-purecounter-end="{{ selesai_magang }}"
+              data-purecounter-duration="1"
+              class="purecounter"
+            ></span>
+            <p>Selesai Magang</p>
+          </div>
+        </div>
+        <!-- End Stats Item -->
+
+        <div class="col-lg-3 col-md-6 d-flex flex-column align-items-center">
+          <i class="bi bi-x-square"></i>
+          <div class="stats-item">
+            <span
+              data-purecounter-start="0"
+              data-purecounter-end="{{ batal_magang }}"
+              data-purecounter-duration="1"
+              class="purecounter"
+            ></span>
+            <p>Batal Magang</p>
+          </div>
+        </div>
+        <!-- End Stats Item -->
+      </div>
+    </div>
+  </section>
+  <!-- /Stats Section -->
+
+  <!-- Gallery Section -->
+  <section id="gallery" class="gallery section">
+    <!-- Section Title -->
+    <div class="container section-title" data-aos="fade-up">
+      <h2>Gallery</h2>
+      <div>
+        <span>Check Our</span>
+        <span class="description-title">Gallery</span>
+      </div>
+    </div>
+    <!-- End Section Title -->
+
+    <div class="container" data-aos="fade-up" data-aos-delay="100">
+      <div class="row g-0">
+        <div class="col-lg-3 col-md-4">
+          <div class="gallery-item">
+            <a
+              href="{{ url_for('static', filename='img/gallery/1.jpg') }}"
+              class="glightbox"
+              data-gallery="img-gallery"
+            >
+              <img
+                src="{{ url_for('static', filename='img/gallery/1.jpg') }}"
+                alt=""
+                class="img-fluid"
+              />
+            </a>
+          </div>
+        </div>
+        <!-- End Gallery Item -->
+
+        <div class="col-lg-3 col-md-4">
+          <div class="gallery-item">
+            <a
+              href="{{ url_for('static', filename='img/gallery/2.jpg') }}"
+              class="glightbox"
+              data-gallery="img-gallery"
+            >
+              <img
+                src="{{ url_for('static', filename='img/gallery/2.jpg') }}"
+                alt=""
+                class="img-fluid"
+              />
+            </a>
+          </div>
+        </div>
+        <!-- End Gallery Item -->
+
+        <div class="col-lg-3 col-md-4">
+          <div class="gallery-item">
+            <a
+              href="{{ url_for('static', filename='img/gallery/3.jpg') }}"
+              class="glightbox"
+              data-gallery="img-gallery"
+            >
+              <img
+                src="{{ url_for('static', filename='img/gallery/3.jpg') }}"
+                alt=""
+                class="img-fluid"
+              />
+            </a>
+          </div>
+        </div>
+        <!-- End Gallery Item -->
+
+        <div class="col-lg-3 col-md-4">
+          <div class="gallery-item">
+            <a
+              href="{{ url_for('static', filename='img/gallery/4') }}"
+              class="glightbox"
+              data-gallery="img-gallery"
+            >
+              <img
+                src="{{ url_for('static', filename='img/gallery/4.jpg') }}"
+                alt=""
+                class="img-fluid"
+              />
+            </a>
+          </div>
+        </div>
+        <!-- End Gallery Item -->
+
+        <div class="col-lg-3 col-md-4">
+          <div class="gallery-item">
+            <a
+              href="{{ url_for('static', filename='img/gallery/5.jpeg') }}"
+              class="glightbox"
+              data-gallery="img-gallery"
+            >
+              <img
+                src="{{ url_for('static', filename='img/gallery/5.jpeg') }}"
+                alt=""
+                class="img-fluid"
+              />
+            </a>
+          </div>
+        </div>
+        <!-- End Gallery Item -->
+
+        <div class="col-lg-3 col-md-4">
+          <div class="gallery-item">
+            <a
+              href="{{ url_for('static', filename='img/gallery/6.jpg') }}"
+              class="glightbox"
+              data-gallery="img-gallery"
+            >
+              <img
+                src="{{ url_for('static', filename='img/gallery/6.jpg') }}"
+                alt=""
+                class="img-fluid"
+              />
+            </a>
+          </div>
+        </div>
+        <!-- End Gallery Item -->
+
+        <div class="col-lg-3 col-md-4">
+          <div class="gallery-item">
+            <a
+              href="{{ url_for('static', filename='img/gallery/7.jpeg') }}"
+              class="glightbox"
+              data-gallery="img-gallery"
+            >
+              <img
+                src="{{ url_for('static', filename='img/gallery/7.jpeg') }}"
+                alt=""
+                class="img-fluid"
+              />
+            </a>
+          </div>
+        </div>
+        <!-- End Gallery Item -->
+
+        <div class="col-lg-3 col-md-4">
+          <div class="gallery-item">
+            <a
+              href="{{ url_for('static', filename='img/gallery/8.jpg') }}"
+              class="glightbox"
+              data-gallery="img-gallery"
+            >
+              <img
+                src="{{ url_for('static', filename='img/gallery/8.jpg') }}"
+                alt=""
+                class="img-fluid"
+              />
+            </a>
+          </div>
+        </div>
+        <!-- End Gallery Item -->
+      </div>
+    </div>
+  </section>
+  <!-- /Gallery Section -->
+
+  <!-- Faq Section -->
+  <section id="faq" class="faq section light-background">
+    <div class="container-fluid">
+      <div class="row gy-4">
+        <div
+          class="col-lg-7 d-flex flex-column justify-content-center order-2 order-lg-1"
+        >
+          <div class="content px-xl-5" data-aos="fade-up" data-aos-delay="100">
+            <h3><span>Frequently Asked </span><strong>Questions</strong></h3>
+            <p>
+              Beberapa pertanyaan yang sering ditanyakan oleh mahasiswa yang
+              ingin memonitor kegiatan Magang di DISKOMINFO
+            </p>
+          </div>
+
+          <div
+            class="faq-container px-xl-5"
+            data-aos="fade-up"
+            data-aos-delay="200"
+          >
+            <div class="faq-item faq-active">
+              <i class="faq-icon bi bi-question-circle"></i>
+              <h3>
+                Siapa saja yang bisa mendaftar Magang di DISKOMINFO Kota
+                Semarang?
+              </h3>
+              <div class="faq-content">
+                <p>
+                  Peserta Magang pada DISKOMINFO Kota Semarang diperuntukkan:
+                  <br />
+                  1. Siswa/Siswi SMA/SMK Sederajat
+                  <br />
+                  2. Mahasiswa/Mahasiswi aktif D-III/D-IV/S1
+                </p>
+              </div>
+              <i class="faq-toggle bi bi-chevron-right"></i>
+            </div>
+            <!-- End Faq item-->
+
+            <div class="faq-item">
+              <i class="faq-icon bi bi-question-circle"></i>
+              <h3>Bagaimana cara login ke SIMANDA?</h3>
+              <div class="faq-content">
+                <p>
+                  Mahasiswa dapat login menggunakan username dan password yang
+                  telah diberikan oleh admin atau dibuat saat pendaftaran
+                  pertama kali di sistem.
+                </p>
+              </div>
+              <i class="faq-toggle bi bi-chevron-right"></i>
+            </div>
+            <!-- End Faq item-->
+
+            <div class="faq-item">
+              <i class="faq-icon bi bi-question-circle"></i>
+              <h3>Bagaimana cara mengisi laporan penugasan harian?</h3>
+              <div class="faq-content">
+                <p>
+                  Setelah login, masuk ke menu "penugasan", pilih tanggal
+                  kegiatan, lalu isi deskripsi aktivitas magang dan simpan.
+                  Pastikan mengisi setiap hari kerja.
+                </p>
+              </div>
+              <i class="faq-toggle bi bi-chevron-right"></i>
+            </div>
+            <!-- End Faq item-->
+
+            <!-- <div class="faq-item">
+                  <i class="faq-icon bi bi-question-circle"></i>
+                  <h3>
+                    Apa yang saya dapatkan setelah magang di DISKOMINFO Kota
+                    Semarang?
+                  </h3>
+                  <div class="faq-content">
+                    <p>
+                      1. Pengalaman kerja dan pembelajaran praktis
+                      <br />
+                      2. Pengembangan keterampilan
+                      <br />
+                      3. Sertifikat Magang
+                    </p>
+                  </div>
+                  <i class="faq-toggle bi bi-chevron-right"></i>
+                </div> -->
+            <!-- End Faq item-->
+
+            <!-- <div class="faq-item">
+                  <i class="faq-icon bi bi-question-circle"></i>
+                  <h3>Apa saja kewajiban peserta magang?</h3>
+                  <div class="faq-content">
+                    <p>
+                      1. Mendaftarkan diri pada aplikasi SIMAKI
+                      <br />
+                      2. Memenuhi durasi/periode magang yang disepakati
+                      <br />
+                      3. Mengikuti dan taat terhadap arahan dan instruksi
+                      <br />
+                      4. Menjaga nama baik dan kerahasiaan data DISKOMINFO Kota
+                      Semarang
+                    </p>
+                  </div>
+                  <i class="faq-toggle bi bi-chevron-right"></i>
+                </div> -->
+            <!-- End Faq item-->
+          </div>
+        </div>
+
+        <div class="col-lg-5 order-1 order-lg-2">
+          <img
+            src="{{ url_for('static', filename='img/faq.jpg') }}"
+            class="img-fluid"
+            alt=""
+            data-aos="zoom-in"
+            data-aos-delay="100"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- /Faq Section -->
+  {% endblock %}
+</main>

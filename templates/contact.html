@@ -1,0 +1,170 @@
+{% extends "layout.html" %} {% block navbar %}
+<nav id="navmenu" class="navmenu">
+    <ul>
+      {% if session.get('username') and session.get('role') == 'user' %}
+        <li><a href="/login/dashboard">Dashboard</a></li>
+        <li><a href="/login/data">Data Peserta</a></li>
+        <li><a href="/login/penugasan">Penugasan</a></li>
+        <li><a href="/login/contact" class="active">Kontak</a></li>
+        <li><a class="nav-bg" href="/logout">LOGOUT</a></li>
+      {% else %}
+        <li><a href="/">Home</a></li>
+        <li><a href="/#about">About</a></li>
+        <li><a href="/#gallery">Gallery</a></li>
+        <li><a href="/#faq">FAQ</a></li>
+        <li><a href="/contact" class="active">Kontak</a></li>
+        <li><a class="nav-bg" href="/loginregister">LOGIN</a></li>
+      {% endif %}
+    </ul>
+    <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+  </nav>
+{% endblock %}
+
+<main class="main">
+  {% block content %}
+    <!-- Page Title -->
+    <section id="hero" class="hero dark-background">
+      <div class="page-title dark-background">
+        <div class="container position-relative">
+          <h1>Kontak</h1>
+          <p>Jangan ragu untuk menghubungi kami jika butuh informasi lebih lanjut.</p>
+          <nav class="breadcrumbs">
+            <ol>
+              <li><a href="/dashboard">Dashboard</a></li>
+              <li class="current">Kontak</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+      <svg class="hero-waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28 " preserveAspectRatio="none" >
+        <defs>
+          <path id="wave-path" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" ></path>
+        </defs>
+        <g class="wave1">
+          <use xlink:href="#wave-path" x="50" y="3"></use>
+        </g>
+        <g class="wave2">
+          <use xlink:href="#wave-path" x="50" y="0"></use>
+        </g>
+        <g class="wave3">
+          <use xlink:href="#wave-path" x="50" y="9"></use>
+        </g>
+      </svg>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact section">
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <!-- Contact Info Boxes -->
+        <div class="row gy-4 mb-5">
+          <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="contact-info-box">
+              <div class="icon-box">
+                <i class="bi bi-geo-alt"></i>
+              </div>
+              <div class="info-content">
+                <h4>Alamat</h4>
+                <p>Jl. Pemuda 148, Sekayu, Semarang Tengah, Kota Semarang</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
+            <div class="contact-info-box">
+              <div class="icon-box">
+                <i class="bi bi-alarm"></i>
+              </div>
+              <div class="info-content">
+                <h4>Waktu Operasional</h4>
+                <p>Setiap Hari Senin - Jum'at</p>
+                <p>Pukul 08:00 - 16:00</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4" data-aos="fade-up" data-aos-delay="300">
+            <div class="contact-info-box">
+              <div class="icon-box">
+                <i class="bi bi-telephone"></i>
+              </div>
+              <div class="info-content">
+                <h4>Nomor Telepon</h4>
+                <p>+62 243549448</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Google Maps (Full Width) -->
+      <div class="map-section" data-aos="fade-up" data-aos-delay="200">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.220725307824!2d110.41106187363151!3d-6.983258593017632!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e708bb22883d313%3A0xc7b865c010d779de!2sDinas%20Komunikasi%2C%20Informatika%2C%20Statistik%20dan%20Persandian%20Kota%20Semarang!5e0!3m2!1sid!2sid!4v1748668919814!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>" width="100%" height="500" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+
+      <!-- Contact Form Section (Overlapping) -->
+      <div class="container form-container-overlap">
+        <div class="row justify-content-center" data-aos="fade-up" data-aos-delay="300">
+          <div class="col-lg-10">
+            <div class="contact-form-wrapper">
+              <h2 class="text-center mb-4">Get in Touch</h2>
+
+              <form action="forms/contact.php" method="post" class="php-email-form">
+                <div class="row g-3">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <div class="input-with-icon">
+                        <i class="bi bi-person"></i>
+                        <input type="text" class="form-control" name="name" placeholder="First Name" required="">
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <div class="input-with-icon">
+                        <i class="bi bi-envelope"></i>
+                        <input type="email" class="form-control" name="email" placeholder="Email Address" required="">
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <div class="input-with-icon">
+                        <i class="bi bi-text-left"></i>
+                        <input type="text" class="form-control" name="sbject" placeholder="Subject" required="">
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-12">
+                    <div class="form-group">
+                      <div class="input-with-icon">
+                        <i class="bi bi-chat-dots message-icon"></i>
+                        <textarea class="form-control" name="message" placeholder="Write Message..." style="height: 180px" required=""></textarea>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-12">
+                    <div class="loading">Loading</div>
+                    <div class="error-message"></div>
+                    <div class="sent-message">Your message has been sent. Thank you!</div>
+                  </div>
+
+                  <div class="col-12 text-center">
+                    <button type="submit" class="btn btn-primary btn-submit">SEND MESSAGE</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  {% endblock %}
+</main>

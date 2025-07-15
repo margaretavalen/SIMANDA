@@ -1,0 +1,309 @@
+{% extends "admin/layout_admin.html" %} 
+
+{% block sidenav %}
+  <ul class="navbar-nav">
+    <li class="nav-item">
+      <a class="nav-link" href="/login/admin">
+        <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+          <i class="ni ni-laptop text-dark text-sm opacity-10"></i>
+        </div>
+        <span class="nav-link-text ms-1">Dashboard</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link active" href="/login/data_admin">
+        <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+          <i class="ni ni-folder-17 text-dark text-sm opacity-10"></i>
+        </div>
+        <span class="nav-link-text ms-1">Data</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link " href="/login/penugasan_admin">
+        <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+          <i class="ni ni-ruler-pencil text-dark text-sm opacity-10"></i>
+        </div>
+        <span class="nav-link-text ms-1">Penugasan</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link " href="/login/data_user">
+        <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+          <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
+        </div>
+        <span class="nav-link-text ms-1">Users</span>
+      </a>
+    </li>
+  </ul>
+{% endblock %}
+
+  <main class="main-content position-relative border-radius-lg ">
+    {% block navbar %}
+    <!-- Navbar -->
+    <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl " id="navbarBlur" data-scroll="false">
+      <div class="container-fluid py-1 px-3">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+            <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="/login/index_admin">Dashboard</a></li>
+            <li class="breadcrumb-item text-sm text-white active" aria-current="page">Data</li>
+          </ol>
+          <h6 class="font-weight-bolder text-white mb-0">Data Peserta Magang</h6>
+        </nav>
+        <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+          <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+            <div class="input-group">
+              <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
+              <input type="text" class="form-control" placeholder="Cari...">
+            </div>
+          </div>
+          <ul class="navbar-nav  justify-content-end">
+            <li class="nav-item d-flex align-items-center">
+              <a href="/logout" class="nav-link text-white font-weight-bold px-0">
+                <i class="fa fa-user me-sm-1"></i>
+                <span class="d-sm-inline d-none">Logout</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- End Navbar -->
+    {% endblock %}
+    {% block content %}
+    <div class="container-fluid py-4">
+      <div class="row">
+        <div class="col-12">
+          <div>
+            <a href="{{ url_for('form_tambah') }}" class="button-tambah btn btn-primary">
+              Tambah Data
+            </a>
+          </div>
+          <div class="card mb-4">
+            <div class="card-header pb-0">
+              <h6>Daftar Peserta Magang</h6>
+            </div>
+            <div class="card-body px-0 pt-0 pb-2">
+              <!-- Tabs Navigation -->
+              <div class="full-width-container">
+                <ul class="nav nav-tabs" id="magangTabs" role="tablist">
+                  <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="akan-tab" data-bs-toggle="tab" data-bs-target="#akan" type="button" role="tab">Akan Magang</button>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="sedang-tab" data-bs-toggle="tab" data-bs-target="#sedang" type="button" role="tab">Sedang Magang</button>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="selesai-tab" data-bs-toggle="tab" data-bs-target="#selesai" type="button" role="tab">Selesai Magang</button>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="batal-tab" data-bs-toggle="tab" data-bs-target="#batal" type="button" role="tab">Batal Magang</button>
+                  </li>
+                </ul>
+              </div>
+
+              <!-- Tabs Content -->
+              <div class="tab-content" id="magangTabsContent">
+                <!-- Akan Magang -->
+                <div class="tab-pane fade show active" id="akan" role="tabpanel" aria-labelledby="akan-tab">
+                  <div class="table-responsive p-0">
+                    {% if dataAdmin %}
+                    <table id="akanTable" class="table align-items-center mb-0">
+                      <thead>
+                        <tr>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">No</th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Foto</th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama</th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Asal</th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Jurusan</th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tanggal Masuk</th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tanggal Keluar</th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Penempatan</th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Action</th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Batal</th>
+                        </tr>
+                      </thead>
+                      <tbody id="akanTableBody">
+                        {% for row in akan_magang %}
+                        <tr>
+                          <td class="text-center text-xs row-number">{{ loop.index }}</td>
+                          <td><img src="{{ url_for('gambar', id=row.id) }}" class="avatar avatar-sm me-3" alt="{{ row.nama }}"></td>
+                          <td class="mb-0 text-sm">{{ row.nama }}</td>
+                          <td class="text-center text-xs">{{ row.asal }}</td>
+                          <td class="text-center text-xs">{{ row.jurusan }}</td>
+                          <td class="text-center text-xs">{{ row.tgl_masuk }}</td>
+                          <td class="text-center text-xs">{{ row.tgl_keluar }}</td>
+                          <td class="text-center text-xs">{{ row.bidang }}</td>
+                          <td class="text-center">
+                            <a href="{{ url_for('form_edit', id=row.id) }}" title="Edit">
+                              <i class="bi bi-pencil-square text-primary"></i> 
+                            </a>
+                          </td>
+                          <td class="text-center">
+                            <form method="POST" action="{{ url_for('batal_magang', peserta_id=row.id) }}" onsubmit="return confirm('Yakin ingin membatalkan magang ini?');">
+                              <button type="submit" class="btn btn-link text-danger p-0 m-0" title="Batalkan Magang">
+                                <i class="bi bi-x-square"></i>
+                              </button>
+                            </form>
+                          </td>
+                        </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                    {% else %}
+                    <p>Data tidak ditemukan.</p>
+                    {% endif %}
+                  </div>
+                </div>
+
+
+                <!-- Sedang Magang -->
+                <div class="tab-pane fade" id="sedang" role="tabpanel" aria-labelledby="sedang-tab">
+                  <div class="table-responsive p-0">
+                    <table id="sedangTable" class="table align-items-center mb-0">
+                      <thead>
+                        <tr>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">No</th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Foto</th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama</th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Asal</th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Jurusan</th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tanggal Masuk</th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tanggal Keluar</th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Penempatan</th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Action</th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Batal</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for row in sedang_magang %}
+                        <tr>
+                          <td class="text-center text-xs row-number">{{ loop.index }}</td>
+                          <td><img src="{{ url_for('gambar', id=row.id) }}" class="avatar avatar-sm me-3" alt="{{ row.nama }}"></td>
+                          <td class="mb-0 text-sm">{{ row.nama }}</td>
+                          <td class="text-center text-xs">{{ row.asal }}</td>
+                          <td class="text-center text-xs">{{ row.jurusan }}</td>
+                          <td class="text-center text-xs">{{ row.tgl_masuk }}</td>
+                          <td class="text-center text-xs">{{ row.tgl_keluar }}</td>
+                          <td class="text-center text-xs">{{ row.bidang }}</td>
+                          <td class="text-center">
+                            <a href="{{ url_for('form_edit', id=row.id) }}" title="Edit">
+                              <i class="bi bi-pencil-square text-primary"></i> <!-- Ikon font-awesome -->
+                            </a>
+                          </td>
+                          <td class="text-center">
+                            <form method="POST" action="{{ url_for('batal_magang', peserta_id=row.id) }}" onsubmit="return confirm('Yakin ingin membatalkan magang ini?');">
+                              <button type="submit" class="btn btn-link text-danger p-0 m-0" title="Batalkan Magang">
+                                <i class="bi bi-x-square"></i>
+                              </button>
+                            </form>
+                          </td>
+                        </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+                <!-- Selesai Magang -->
+                <div class="tab-pane fade" id="selesai" role="tabpanel" aria-labelledby="selesai-tab">
+                  <div class="table-responsive p-0">
+                    <table id="selesaiTable" class="table align-items-center mb-0">
+                      <thead>
+                        <tr>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">No</th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Foto</th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama</th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Asal</th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Jurusan</th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tanggal Masuk</th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tanggal Keluar</th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Penempatan</th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Action</th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Batal</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for row in selesai_magang %}
+                        <tr>
+                          <td class="text-center text-xs row-number">{{ loop.index }}</td>
+                          <td><img src="{{ url_for('gambar', id=row.id) }}" class="avatar avatar-sm me-3" alt="{{ row.nama }}"></td>
+                          <td class="mb-0 text-sm">{{ row.nama }}</td>
+                          <td class="text-center text-xs">{{ row.asal }}</td>
+                          <td class="text-center text-xs">{{ row.jurusan }}</td>
+                          <td class="text-center text-xs">{{ row.tgl_masuk }}</td>
+                          <td class="text-center text-xs">{{ row.tgl_keluar }}</td>
+                          <td class="text-center text-xs">{{ row.bidang }}</td>
+                          <td class="text-center">
+                            <a href="{{ url_for('form_edit', id=row.id) }}" title="Edit">
+                              <i class="bi bi-pencil-square text-primary"></i> <!-- Ikon font-awesome -->
+                            </a>
+                          </td>
+                          <td class="text-center">
+                            <form method="POST" action="{{ url_for('batal_magang', peserta_id=row.id) }}" onsubmit="return confirm('Yakin ingin membatalkan magang ini?');">
+                              <button type="submit" class="btn btn-link text-danger p-0 m-0" title="Batalkan Magang">
+                                <i class="bi bi-x-square"></i>
+                              </button>
+                            </form>
+                          </td>
+                        </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+                <!-- Batal Magang -->
+                <div class="tab-pane fade" id="batal" role="tabpanel" aria-labelledby="batal-tab">
+                  <div class="table-responsive p-0">
+                    <table id="batalTable" class="table align-items-center mb-0">
+                      <thead>
+                        <tr>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">No</th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Foto</th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama</th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Asal</th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Jurusan</th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tanggal Masuk</th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tanggal Keluar</th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Penempatan</th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Action</th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Batal</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for row in batal_magang %}
+                        <tr>
+                            <td class="text-center text-xs row-number">{{ loop.index }}</td>
+                            <td><img src="{{ url_for('gambar', id=row.id) }}" class="avatar avatar-sm me-3" alt="{{ row.nama }}"></td>
+                            <td class="mb-0 text-sm">{{ row.nama }}</td>
+                            <td class="text-center text-xs">{{ row.asal }}</td>
+                            <td class="text-center text-xs">{{ row.jurusan }}</td>
+                            <td class="text-center text-xs">{{ row.tgl_masuk }}</td>
+                            <td class="text-center text-xs">{{ row.tgl_keluar }}</td>
+                            <td class="text-center text-xs">{{ row.bidang }}</td>
+                            <td class="text-center">
+                              <a href="{{ url_for('form_edit', id=row.id) }}" title="Edit">
+                                <i class="bi bi-pencil-square text-primary"></i> 
+                              </a>
+                            </td>
+                            <td class="text-center">
+                              <form method="POST" action="{{ url_for('batal_magang', peserta_id=row.id) }}" onsubmit="return confirm('Yakin ingin membatalkan magang ini?');">
+                                <button type="submit" class="btn btn-link text-danger p-0 m-0" title="Batalkan Magang">
+                                  <i class="bi bi-x-square"></i>
+                                </button>
+                              </form>
+                            </td>
+                          </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endblock %}
+  </main>

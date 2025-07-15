@@ -1,0 +1,189 @@
+{% extends "layout.html" %}
+
+    {% block navbar %}
+    <nav id="navmenu" class="navmenu">
+      <ul>
+        <li><a href="/login/dashboard">Dashboard</a></li>
+        <li><a href="/login/data">Data Peserta</a></li>
+        <li><a href="/login/tugas" class="active">Penugasan</a></li>
+        <li><a href="/login/contact">Kontak</a></li>
+        <li><a class="nav-bg" href="/logout">LOGOUT</a></li>
+      </ul>
+      <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+    </nav>
+    {% endblock %}
+  
+    <main class="main">
+      {% block content %}
+      <!-- Page Title -->
+      <section id="hero" class="hero dark-background">
+        <div class="page-title" data-aos="fade">
+          <div class="container position-relative">
+            <h1 class="center">Penugasan</h1>
+            <p>Seluruh peserta magang DIWAJIBKAN untuk melakukan repost kegiatan Pemerintah Kota Semarang (Pemkot Semarang) melalui akun media sosial masing-masing.</p>
+            <nav class="breadcrumbs">
+              <ol>
+                <li><a href="/dashboard">Dashboard</a></li>
+                <li class="current">Penugasan</li>
+              </ol>
+            </nav>
+          </div>
+        </div>
+        <svg class="hero-waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28 " preserveAspectRatio="none" >
+          <defs>
+            <path id="wave-path" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" ></path>
+          </defs>
+          <g class="wave1">
+            <use xlink:href="#wave-path" x="50" y="3"></use>
+          </g>
+          <g class="wave2">
+            <use xlink:href="#wave-path" x="50" y="0"></use>
+          </g>
+          <g class="wave3">
+            <use xlink:href="#wave-path" x="50" y="9"></use>
+          </g>
+        </svg>
+      </section>
+      <!-- End Page Title -->
+      <section id="events-2" class="events-2 section">
+        <div class="container" data-aos="fade-up" data-aos-delay="100">
+          <div class="intro-wrapper">
+            <div class="row align-items-center">
+              <div class="col-lg-6 mb-4 mb-lg-0" data-aos="fade-right" data-aos-delay="200">
+                <div class="intro-image">
+                  <img src="{{ url_for('static', filename='img/testimonials-bg.jpg') }}" alt="Academic Programs" class="img-fluid rounded-lg shadow">
+                  <div class="accent-shape"></div>
+                </div>
+              </div>
+              <div class="col-lg-6" data-aos="fade-left" data-aos-delay="300">
+                <div class="intro-content">
+                  <div class="container section-title" data-aos="fade-up">
+                    <h2>Penugasan Magang</h2>
+                    <div>
+                      <span>Ketentuan Penugasan</span>
+                    </div>
+                  </div>
+                  <!-- <p class="intro-text">Setiap peserta magang DIWAJIBKAN melakukan  repost kegiatan Pemerintah Kota Semarang (Pemkot Semarang) melalui akun media sosial masing-masing.</p> -->
+                  <div class="key-highlights">
+                    <div class="highlight-item">
+                      <i class="bi bi-check-circle-fill"></i>
+                      <span>Repost dilakukan minimal 3 kali dalam satu hari.</span>
+                    </div>
+                    <div class="highlight-item">
+                      <i class="bi bi-check-circle-fill"></i>
+                      <span>Kegiatan yang direpost harus merupakan kegiatan terbaru dan terupdate, tidak kadaluarsa.</span>
+                    </div>
+                    <div class="highlight-item">
+                      <i class="bi bi-check-circle-fill"></i>
+                      <span>Repost dilakukan dalam bentuk screenshot yang jelas, serta mencantumkan akun resmi , @pemerintahkotasemarang, @diskominfokotasemarang, @semarangpemkot.</span>
+                    </div>
+                    <div class="highlight-item">
+                      <i class="bi bi-check-circle-fill"></i>
+                      <span>Bukti screenshot repost wajib dikirimkan melalui form yang telah disediakan.</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="container section-title" data-aos="fade-up">
+            <h2>Form Penugasan</h2>
+            <div>
+              <span>Silahkan Isi Form Berikut</span>
+            </div>
+          </div>
+          <div class="row g-4">
+            <div class="col-lg-4">
+              <div class="sidebar">
+                <div class="sidebar-item" data-aos="fade-up" data-aos-delay="100">
+                  <h3 class="sidebar-title">Pilih Tanggal</h3>
+                  <div class="event-calendar">
+                    <p class="note-calendar">Tanggal yang sudah berwarna kuning berarti sudah melakukan penugasan di hari tersebut</p>
+                    <div id="calendar-container"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-8">
+              <div class="events-list">
+                <div class="event-item" data-aos="fade-up">
+                  <div class="event-content">
+                    <h3 class="sidebar-title">Form Penugasan</h3>
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                      {% if messages %}
+                        <div class="flash-messages">
+                          {% for category, message in messages %}
+                            <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                              {{ message }}
+                              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                          {% endfor %}
+                        </div>
+                      {% endif %}
+                    {% endwith %}
+                    <form action="/upload" method="POST" enctype="multipart/form-data">
+                      <div class="input-group input-group-icon">
+                        <input type="text" name="username" placeholder="username" value="{{ username }}" readonly hidden/>
+                        <div class="input-icon"><i class="bi bi-person"></i></div>
+                      </div>
+                      <div class="input-group input-group-icon">
+                        <input type="text" name="nama" placeholder="Nama" value="{{ nama }}" readonly />
+                        <div class="input-icon"><i class="bi bi-person"></i></div>
+                      </div>
+
+                      <div class="input-group input-group-icon">
+                        <input type="text" name="asal" placeholder="Sekolah/Universitas" />
+                        <div class="input-icon"><i class="bi bi-building"></i></div>
+                      </div>
+
+                      <div class="input-group input-group-icon">
+                        <select name="bidang" required>
+                          <option value="">-- Pilih Bidang --</option>
+                          <option value="Sekretariat">Sekretariat</option>
+                          <option value="Bidang1">Bidang 1</option>
+                          <option value="Bidang2">Bidang 2</option>
+                          <option value="Bidang3">Bidang 3</option>
+                          <option value="Bidang4">Bidang 4</option>
+                          <option value="Bidang5">Bidang 5</option>
+                        </select>
+                        <div class="input-icon"><i class="bi bi-list-task"></i></div>
+                      </div>
+                      
+                      <div class="input-group">
+                        <h4>Date</h4>
+                        <div class="input-group">
+                          <label for="tanggal">Tanggal Dipilih :</label>
+                          <input type="text" id="tanggal" name="tanggal" readonly />
+                        </div>
+                      </div>
+
+                      <div class="input-group">
+                        <h4>Upload File</h4>
+                        <div class="input-group">
+                          <label>Silahkan upload 3 screenshot sekaligus</label>
+                          <div class="upload-container">
+                            <label for="gallery-photo-add" class="upload-box">
+                              <span>Drag & Drop or Click to Upload</span>
+                              <input type="file" name="files[]" id="gallery-photo-add" multiple accept="image/png, image/jpeg, image/jpg">
+                              <small>Max 2 MB (PNG, JPEG, JPG)</small>
+  
+                              <!-- ✅ Area preview ditaruh di dalam box -->
+                              <div id="image-preview" class="preview-grid"></div>
+                            </label>
+                          </div>
+  
+                          <div>
+                            <button type="submit" class="btn-primary">Upload</button>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      {% endblock %}
+    </main>
